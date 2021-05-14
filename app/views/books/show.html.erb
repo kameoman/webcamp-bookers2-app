@@ -1,0 +1,25 @@
+<%= render 'books/list', books: @books %>
+<div class="post-body">
+<div class="form-group">
+    <label for="book_title">Title</label>
+    <input class="form-control book_title" type="text" value=<%= @book.title %> name="book[title]" id="book_title">
+  </div>
+  <div class="form-group">
+    <label for="book_opinion">Opinion</label>
+    <textarea class="form-control book_body" name="book[body]" id="book_body"><%= @book.caption %></textarea>
+  </div>
+  <div class="form-group">
+    <input type="submit" name="commit" value="Update Book" class="btn btn-success" data-disable-with="Update Book">
+  </div>
+</form>
+  
+  <a class="show" href="/books">show</a>
+  |
+    <a class="back" href="/books">Back</a>
+  <!--削除機能-->
+  <% if @book.user == current_user %>
+   <%= link_to "削除", book_path(@book), method: :delete %>
+  <% end %>
+
+</div>
+<%= render 'books/footer', books: @books %>

@@ -1,0 +1,49 @@
+<%= render 'books/list', books: @books %>
+<!DOCTYPE html>
+<html lang="ja">
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://kit.fontawesome.com/124e42cc69.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+<body>
+<main>
+<div class="container">
+  <div class= "row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>User info</h2>
+      <%= form_with model:@user, local:true do |f| %>
+      <div class = "form-group">
+      <label for="inputName">Name</label><br>
+      <input class="form-control name" type="text" name="user[name]" id="user_name">
+      </div>
+
+      <div class = "form-group">
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%><br>
+      <img class="attachment user profile_image fallback" src="/assets/no_image.jpg">
+      <label for="inputImage">Image</label><br>
+      <input class="form-control-file"  include_hidden="false" type="file" 
+      name="user[profile_image]" id="user_profile_image">
+      </div>
+
+      <div class = "form-group">
+      <label for="user_introduction">Introduction</label><br>
+      <textarea class="form-control introduction" name="user[introduction]" id="user_introduction"></textarea>
+      </div>
+
+      <div class = "form-group">
+        <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
+      </div>
+      <% end %>
+    </div>
+    </div>
+  </div>
+  
+</main>
+
+
+
+<%= render 'books/footer', books: @books %>

@@ -63,3 +63,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #   ↓認証機能を提供してくれる
 gem 'devise'
 
+# 画像の投稿機能を実装します。
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
+
+gem 'kaminari'
+
+# Bootstrapの導入
+gem 'bootstrap', '~> 4.5'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.13'
