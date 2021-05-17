@@ -9,7 +9,12 @@ class User < ApplicationRecord
  
  attachment :profile_image
  
- validates :name, presence: true
+ validates :name, uniqueness: true, presence: true,length: {minimum: 2,maximum: 20 }
+# validates :introduction, presence: true,length: {maximum: 50 }
+
+ def books
+   Book.where(user_id: self.id)
+ end
  
   def email_required?
     false

@@ -30,7 +30,9 @@
          <% if user_signed_in? %>
   　　<!--ここから下はヘッダとして設定するところ-->
   　    　<li>
-          <a class="fas fa-home nav-link text-light" href="/user/current_user"> Home</a>
+          <%= link_to user_path(current_user) ,class: "fas fa-home nav-link text-light" do %>
+          Home
+          <% end %>
          </li>
          <li>
           <a class="fas fa-users nav-link text-light" href="/users"> Users</a>

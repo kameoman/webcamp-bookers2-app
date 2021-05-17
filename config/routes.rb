@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # ↓トップページをルートパスとする
   root to: 'books#top'
-  get 'about' => 'books#about'
-  resources :books do
- end
-  
+  get '/home/about' => 'books#about'
+  resources :books
+
+
  resources :users, only: [:show,:edit,:update,:index]
-  
+
 end

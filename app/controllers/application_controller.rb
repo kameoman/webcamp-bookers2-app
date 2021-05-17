@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   # ログイン認証が成功していないと、トップページ以外の画面（ログインと新規登録は除く）は表示できない仕様
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-
-
+    
   def after_sign_in_path_for(resource)
     user_path(@user.id)
   end
@@ -22,8 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   def about
-    @books = Book.all
-    @book = Book.new
   end
 
 end

@@ -12,30 +12,30 @@ class BooksController < ApplicationController
 
   end
 
-  # createは、投稿データを保存するアクションメソッド
-  def create
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
-    
-    if@book.save
-      flash[:success] = 'You have created book successfully.'
-      redirect_to book_path(@book)
-    else
-      @books = Book.all
-      flash.now[:danger] = 'error'
-      render　books_path
-    end
-    
-  end
-
   def index
     @books = Book.all
     @book = Book.new
-    @users = User.all
+    @book.user = current_user
   end
+
+
+
+  # createは、投稿データを保存するアクションメソッド
+  def create
+    @books = Book.all
+    @book = Book.new(book_params)
+    @book.user = current_user
+    if@book.save
+    redirect_to book_path(@book)
+    else
+    render :index
+    end
+  end
+
 
   def show
     @book = Book.find(params[:id])
+    @user = @book.user
   end
 
   def destroy
@@ -65,7 +65,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :caption)
+    params.require(:book).permit(:title, :body)
   end
 
 
