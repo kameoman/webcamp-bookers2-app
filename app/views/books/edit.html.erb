@@ -1,67 +1,29 @@
-<body>
-  <main>
-    <div class="container px-5 px-sm-0" >
-    <div class="error_explanation text-danger lead">
-    <% if @book.errors.any? %>
-      <h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
-      <% @book.errors.full_messages.each do |message| %>
-      <ul><li>
-        <%= message %>
-        </li>
-        </ul>
+<main>
+        <p id="notice"></p>
+        <div class="container">
+            <% if @book.errors.any? %>
+<h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
+<% @book.errors.full_messages.each do |message| %>
+<ul><li>
+<%= message %>
+  </li>
+  </ul>
+ <% end %>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+  		<h1>Editing Book</h1>
+    　 <%= form_with model:@book,local:true do |f| %>
+       <label for="inputTitle">Title</label></br>
+      <%= f.text_field :title %></br>
+      <label for="inputOpinion">opinion</label></br>
+      <%= f.text_area :body %></br>
+      <%= f.submit 'Update Book',class: "btn btn-success" %></br>
       <% end %>
-    <% end %>
-    </div>
-      <div class="row">
-      <div class="col-md-3">
-        <h2>User info</h2>
-          <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size:'100x100' %>
-          <table class="table">
-            <tbody>
-              <tr>
-                <th>name</th>
-                <th><%= @book.user.name %></th>
-              </tr>
-              <tr>
-                <th>introduction</th>
-                <th><%= @book.user.introduction %></th>
-              </tr>
-            </tbody>
-          </table>
-          <div class="row">
-              <%= link_to edit_user_path(current_user) ,class: "btn btn-outline-secondary btn-block fas fa-user-cog" do %>
-              <% end %>
-          </div>
-          <h2 class="mt-3">New book</h2>
-          <%= form_with model:@book,local:true do |f| %>
-           <h4>Title</h4>
-            <%= f.text_field :title, class: "form-control" %>
-            <h4>Opinion</h4>
-            <%= f.text_area :body, class: "form-control"  %>
-            <%= f.submit 'Create Book',class: "btn btn-success my-3"%>
-           <% end %>
-            </div>
-      <div class="col-md-8 offset-md-1">
-          <h2>Book detail</h2>
-            <table class="table table-hover table-inverse">
-                  <tbody>
-                    <td><%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></br>
-                    <%= link_to @book.user.name, user_path %></td>
-                    <td><%= link_to @book.title,book_path(@book) %></td>
-                    <td><%= @book.body %></td>
-                    
-                    <% if user_signed_in? && current_user.id == @book.user_id %>
-                    <td><%= link_to "Edit",edit_book_path(@book),class: "btn btn-sm btn-success" %></td>
-                    <td><%= link_to "Destroy", book_path(@book), method: :delete ,class: "btn btn-sm btn-danger" ,data: { confirm: 'Are you sure?' }%></td>
-                    <% end %>
-                 </tbody>
-            </table>
-      </div>
-    </div>
+      <%= link_to"Show",book_path(@book) %>
+      |
+      <a class="back" href="/books">Back</a>
   </div>
-     <!--jQuery, Popper.js などの JavaScript プラグイン-->
-  <!--  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
-  <!--  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
-  <!--  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>-->
-  </main>
-</body>
+</div>
+  
+      </div></main>

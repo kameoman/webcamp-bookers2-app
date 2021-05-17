@@ -1,10 +1,15 @@
 <body>
+    <% if flash[:notice] %>
+     <p id="notice">
+       <%= flash[:notice] %>
+     </p>
+   <% end %>
   <main>
     <div class="container px-5 px-sm-0" >
     <div class="error_explanation text-danger lead">
-    <% if @book.errors.any? %>
-      <h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
-      <% @book.errors.full_messages.each do |message| %>
+    <% if @book_id.errors.any? %>
+      <h3><%= @book_id.errors.count %>errors prohibited this obj from being saved:</h3>
+      <% @book_id.errors.full_messages.each do |message| %>
       <ul><li>
         <%= message %>
         </li>
@@ -15,16 +20,16 @@
       <div class="row">
       <div class="col-md-3">
         <h2>User info</h2>
-          <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size:'100x100' %>
+          <%= attachment_image_tag @book_id.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size:'100x100' %>
           <table class="table">
             <tbody>
               <tr>
                 <th>name</th>
-                <th><%= @book.user.name %></th>
+                <th><%= @book_id.user.name %></th>
               </tr>
               <tr>
                 <th>introduction</th>
-                <th><%= @book.user.introduction %></th>
+                <th><%= @book_id.user.introduction %></th>
               </tr>
             </tbody>
           </table>
@@ -45,14 +50,14 @@
           <h2>Book detail</h2>
             <table class="table table-hover table-inverse">
                   <tbody>
-                    <td><%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></br>
-                    <%= link_to @book.user.name, user_path %></td>
-                    <td><%= link_to @book.title,book_path(@book) %></td>
-                    <td><%= @book.body %></td>
+                    <td><%= attachment_image_tag @book_id.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %></br>
+                    <%= link_to @book_id.user.name, user_path(@user) %></td>
+                    <td><%= link_to @book_id.title,book_path(@book_id) %></td>
+                    <td><%= @book_id.body %></td>
                     
-                    <% if user_signed_in? && current_user.id == @book.user_id %>
-                    <td><%= link_to "Edit",edit_book_path(@book),class: "btn btn-sm btn-success" %></td>
-                    <td><%= link_to "Destroy", book_path(@book), method: :delete ,class: "btn btn-sm btn-danger" ,data: { confirm: 'Are you sure?' }%></td>
+                    <% if user_signed_in? && current_user.id == @book_id.user_id %>
+                    <td><%= link_to "Edit",edit_book_path(@book_id),class: "btn btn-sm btn-success" %></td>
+                    <td><%= link_to "Destroy", book_path(@book_id), method: :delete ,class: "btn btn-sm btn-danger" ,data: { confirm: 'Are you sure?' }%></td>
                     <% end %>
                  </tbody>
             </table>

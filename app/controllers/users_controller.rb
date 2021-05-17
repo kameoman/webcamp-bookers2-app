@@ -1,36 +1,61 @@
 class UsersController < ApplicationController
+  before_action :ensure_correct_user, only: [:edit, :update]
+
   def show
     # ユーザのデータを1件取得し、インスタンス変数へ
-    if@user = User.find(params[:id])
+    @user = User.find(params[:id])
     # ページングのpageメソッドを利用して、すべての投稿画像が表示されないように設定
-    flash[:success] = 'Welcome! You have signed up successfully.'
-    @users = User.all
-    end
+    @book = Book.new
+    
   end
+  
+  def after_log_in_path_for(resource)
+    flash[:success] = "Signed in successfully."
+    user_path(@user.id)
+  end
+  
+  
 
   def index
     @users = User.all
-    @user = User.new
-    @books = Book.all
-    @book = current_user
+    @user = current_user
+    @book = Book.new
   end
   
   def edit
     @user = User.find(params[:id])
-    @book = Book.new(book_params)
-
+    if @user.id != current_user.id
+    redirect_to users_path
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to book_path
+    if@user.update(user_params)
+      flash[:notice] = "You have updated user successfully." 
+    redirect_to  user_path(params[:id])
+    else
+    render 'edit'
+    end 
   end
+
+  # def limitation_correct_user
+  #   unless @current_user.id == params[:id].to_i
+  #   redirect_to books_path
+  #   end
+  # end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
+  end
+  
+  def ensure_correct_user
+    @user = User.find_by(id: params[:id])
+    if @user.id != current_user.id
+    redirect_to users_path
+    end
   end
 
 end

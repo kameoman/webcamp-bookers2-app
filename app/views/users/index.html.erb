@@ -13,18 +13,18 @@
       <div class="row">
         <div class="col-md-3">
           <h2>User info</h2>
-          <%= attachment_image_tag @book, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
           <!--<img class=と入力する-->
          <table class= "table">
             <tbody>
               <tr></tr>
               <tr>
                 <th>name</th>
-                <th><%= @book.name %></th>
+                <th><%= @user.name %></th>
               </tr>
               <tr>
                 <th>introduction</th>
-                <th><%= @book.introduction %></th>
+                <th><%= @user.introduction %></th>
               </tr>
             </tbody>
           </table>
